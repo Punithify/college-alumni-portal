@@ -9,7 +9,15 @@ import {
 } from "@/components/ui/card"
 import SearchForm from "@/components/custom/SearchForm"
 
-async function getData() {
+type StudentData = {
+  id: number
+  username: string
+  email: string
+  department: string
+  graduation_year: number
+}
+
+async function getData(): Promise<StudentData[]> {
   const res = await getStudentsData()
   if (!res.ok) {
     throw new Error("Failed to fetch data")
@@ -19,7 +27,7 @@ async function getData() {
 }
 
 export default async function DashboardPage() {
-  const data = await getData()
+  const data: StudentData[] = await getData()
   console.log(data)
 
   return (
@@ -30,7 +38,7 @@ export default async function DashboardPage() {
 
       <div className="mt-4 w-full flex justify-center">
         <div className="flex flex-wrap justify-center space-x-4">
-          {data.map((item) => (
+          {data.map((item: StudentData) => (
             <div key={item.id} className="w-64">
               <Card>
                 <CardHeader>
