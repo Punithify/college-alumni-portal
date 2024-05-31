@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { format } from "date-fns"
-import { useForm } from "react-hook-form"
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
 import { cn } from "@/lib/utils"
@@ -29,6 +29,18 @@ import { Textarea } from "@/components/ui/textarea"
 import { Toaster } from "@/components/ui/toaster"
 import { toast } from "@/components/ui/use-toast"
 
+type FormData = {
+  username: string
+  dob: Date
+  mobile: string
+  email: string
+  department: string
+  graduationYear: number
+  specialisation: string
+  extracurricularActivities: string
+  cocurricularActivities: string
+}
+export type ExtendedFieldValues = FieldValues & FormData
 const formSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -53,11 +65,11 @@ const formSchema = z.object({
 
 export default function StudentForm() {
   const [date, setDate] = useState<Date | undefined>(new Date())
-  const form = useForm({
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
   })
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit: SubmitHandler<ExtendedFieldValues> = async (data) => {
     console.log(data)
 
     try {
