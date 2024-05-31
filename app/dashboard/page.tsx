@@ -1,3 +1,6 @@
+import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth"
+
 import { getStudentsData } from "@/lib/utils"
 import {
   Card,
@@ -27,6 +30,11 @@ async function getData(): Promise<StudentData[]> {
 }
 
 export default async function DashboardPage() {
+  const session = await getServerSession()
+  if (!session) {
+    redirect("/login")
+  }
+
   const data: StudentData[] = await getData()
   console.log(data)
 
