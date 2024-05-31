@@ -1,3 +1,4 @@
+import { getStudentsData } from "@/lib/utils"
 import {
   Card,
   CardContent,
@@ -7,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import SearchForm from "@/components/custom/SearchForm"
-import { getStudentsData } from "@/app/api/auth/student/route"
 
 async function getData() {
   const res = await getStudentsData()
