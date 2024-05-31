@@ -58,7 +58,7 @@ export default function LoginForm() {
         console.log("Login Successful", response)
         toast({ title: "Login Successful" })
         router.push("/dashboard")
-        router.refresh()
+        // router.refresh()
       } else {
         throw new Error("Network response was not ok")
       }
