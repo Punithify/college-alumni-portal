@@ -1,41 +1,47 @@
 import * as React from "react"
 import Link from "next/link"
+import { getServerSession } from "next-auth"
 
-import { NavItem } from "@/types/nav"
-import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 
-interface MainNavProps {
-  items?: NavItem[]
-}
+import SignOutButton from "./custom/SignoutButton"
 
-export function MainNav({ items }: MainNavProps) {
+export async function MainNav() {
+  const session = await getServerSession()
+
   return (
-    <div className="flex gap-6 md:gap-10">
+    <div className="flex justify-between items-center gap-6 md:gap-10 w-full">
       <Link href="/" className="flex items-center space-x-2">
         <Icons.logo className="h-6 w-6" />
-        <span className="inline-block font-bold">{siteConfig.name}</span>
+        <span className="inline-block font-bold">AlumniNetwork</span>
       </Link>
-      {items?.length ? (
-        <nav className="flex gap-6">
-          {items?.map(
-            (item, index) =>
-              item.href && (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className={cn(
-                    "flex items-center text-sm font-medium text-muted-foreground",
-                    item.disabled && "cursor-not-allowed opacity-80"
-                  )}
-                >
-                  {item.title}
-                </Link>
-              )
-          )}
-        </nav>
-      ) : null}
+      <nav className="flex items-center gap-6 flex-1">
+        {session ? (
+          <>
+            <Link
+              href="/dashboard"
+              className="text-sm font-medium text-muted-foreground"
+            >
+              Dashboard
+            </Link>
+            <Link
+              href="/student"
+              className="text-sm font-medium text-muted-foreground"
+            >
+              Add Student
+            </Link>
+          </>
+        ) : (
+          <Link
+            href="/login"
+            className="text-sm font-medium text-muted-foreground"
+          >
+            Login
+          </Link>
+        )}
+      </nav>
+      {session && <SignOutButton />}
     </div>
   )
 }
