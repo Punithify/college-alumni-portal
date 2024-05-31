@@ -59,13 +59,13 @@ const handler = NextAuth({
       console.log("token : ", token)
       return token
     },
-    async session({ session, token }) {
-      if (session?.user) {
-        session.user.role = token.role
-      }
-      console.log("session:", session)
-      return session
-    },
+    // async session({ session, token }) {
+    //   if (session?.user) {
+    //     session.user.role = token.role
+    //   }
+    //   console.log("session:", session)
+    //   return session
+    // },
   },
 })
 
