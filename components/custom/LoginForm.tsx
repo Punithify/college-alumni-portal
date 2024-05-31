@@ -58,7 +58,7 @@ export default function LoginForm() {
         console.log("Login Successful", response)
         toast({ title: "Login Successful" })
         router.replace("/dashboard")
-        router.refresh()
+        // router.refresh()
       } else {
         throw new Error("Network response was not ok")
       }
@@ -79,7 +79,7 @@ export default function LoginForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          // className="p-4 md:p-16 flex flex-col items-center justify-center gap-y-6"
+          className="p-4 md:p-16 flex flex-col items-center justify-center gap-y-6"
         >
           <FormField
             control={form.control}
