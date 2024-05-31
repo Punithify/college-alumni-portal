@@ -73,8 +73,8 @@ export default function FormPage() {
   }
 
   return (
-    <>
-      <Form {...form} className="w-2/3 space-y-6">
+    <div className="w-2/3 space-y-6">
+      <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
@@ -106,6 +106,6 @@ export default function FormPage() {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
-    </>
+    </div>
   )
 }

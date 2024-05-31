@@ -74,9 +74,9 @@ export default function LoginForm() {
   }
 
   return (
-    <>
+    <div className="w-1/3 space-y-6">
       <Toaster />
-      <Form {...form} className="w-1/3 space-y-6">
+      <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           // className="p-4 md:p-16 flex flex-col items-center justify-center gap-y-6"
@@ -118,6 +118,6 @@ export default function LoginForm() {
           </Button>
         </form>
       </Form>
-    </>
+    </div>
   )
 }
