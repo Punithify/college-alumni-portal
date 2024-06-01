@@ -119,7 +119,7 @@ export default function LoginForm() {
           </Button>
         </form>
         <span className="text-white mt-4">
-          Don't have an Account
+          Donot have an Account
           <Link href="/register">
             <span className="text-green-500 ml-2">signup</span>
           </Link>
