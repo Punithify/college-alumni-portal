@@ -1,13 +1,39 @@
-# next-template
-
-A Next.js 13 template for building apps with Radix UI and Tailwind CSS.
-
-## Usage
-
-```bash
-npx create-next-app -e https://github.com/shadcn/next-template
-```
+# Alumni Network Portal
 
 ## Features
 
-- Next.js 14 App Directory
+- Authenication
+- Admin, add student
+- Search for students
+
+## Documentation
+
+- Shadcn-UI
+- Authenication using next-auth
+- React hook form and zod for validation
+- Vercel Postgres
+
+## Installation
+
+Install my-project with npm
+
+```bash
+git clone <repo-link>
+cd my-project
+npm install
+npm run dev
+```
+
+## API Reference
+
+#### Post Student form
+
+```http
+  POST /api/auth/student
+```
+
+#### GET Students
+
+```http
+  GET /api/auth/student
+```
