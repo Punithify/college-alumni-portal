@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
@@ -117,6 +118,12 @@ export default function LoginForm() {
             {form.formState.isSubmitting ? "Loading...." : "Login"}
           </Button>
         </form>
+        <span className="text-white mt-4">
+          Don't have an Account
+          <Link href="/register">
+            <span className="text-green-500 ml-2">signup</span>
+          </Link>
+        </span>
       </Form>
     </div>
   )
