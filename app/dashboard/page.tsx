@@ -1,7 +1,9 @@
-import { redirect } from "next/navigation"
+"use client"
+
+import { useEffect, useState } from "react"
+import { redirect, useSearchParams } from "next/navigation"
 import { getServerSession } from "next-auth"
 
-import { getStudentsData } from "@/lib/utils"
 import {
   Card,
   CardContent,
@@ -10,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import AlertMessage from "@/components/custom/AlertMessage"
 import SearchForm from "@/components/custom/SearchForm"
 
 type StudentData = {
@@ -20,35 +23,43 @@ type StudentData = {
   graduation_year: number
 }
 
-async function getData(): Promise<StudentData[]> {
-  const res = await getStudentsData()
-  if (!res.ok) {
-    throw new Error("Failed to fetch data")
-  }
+export default function DashboardPage() {
+  const [resData, setResData] = useState([])
 
-  return res.json()
-}
+  useEffect(() => {
+    async function getData() {
+      const res = await fetch("/api/auth/student")
+      const data = await res.json()
+      console.log(data)
+      setResData(data)
+    }
+    getData()
+  }, [])
 
-export default async function DashboardPage() {
-  const session = await getServerSession()
-  if (!session) {
-    redirect("/login")
-  }
+  const data: StudentData[] = resData
+  const searchParams = useSearchParams()
+  const searchQuery = searchParams.get("query") || ""
 
-  const data: StudentData[] = await getData()
-  console.log(data)
+  const filteredData = data?.filter(
+    (item) =>
+      item.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.department.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.graduation_year.toString().includes(searchQuery)
+  )
+
+  console.log(filteredData)
 
   return (
     <>
       <div className="flex justify-center items-center mt-4">
         <SearchForm />
       </div>
-
       <div className="mt-4 w-full flex justify-center">
         <div className="flex flex-wrap justify-center space-x-4">
-          {!data && <p>Something went wrong</p>}
-          {data &&
-            data.map((item: StudentData) => (
+          {filteredData.length == 0 && <AlertMessage />}
+          {filteredData &&
+            filteredData.map((item: StudentData) => (
               <div key={item.id} className="w-64">
                 <Card>
                   <CardHeader>

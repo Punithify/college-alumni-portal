@@ -46,3 +46,30 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ message: "success" })
 }
+
+async function getStudents() {
+  try {
+    const students = await sql`
+      SELECT
+       *
+      FROM student
+    `
+    return students.rows
+  } catch (e) {
+    console.error("Error fetching students:", e)
+    throw e
+  }
+}
+
+export async function GET(request: Request) {
+  try {
+    const students = await getStudents()
+    return NextResponse.json(students)
+  } catch (e) {
+    console.error("Error in GET handler:", e)
+    return NextResponse.json(
+      { error: "Failed to fetch students" },
+      { status: 500 }
+    )
+  }
+}
