@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -31,6 +32,8 @@ const FormSchema = z.object({
 type FormData = z.infer<typeof FormSchema>
 
 export default function FormPage() {
+  const router = useRouter()
+
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -59,7 +62,8 @@ export default function FormPage() {
           title: "Registration Successful",
           description: "You have successfully registered.",
         })
-        // Additional logic for successful registration can be added here
+        router.push("/dashboard")
+        router.refresh()
       } else {
         throw new Error("Network response was not ok")
       }
