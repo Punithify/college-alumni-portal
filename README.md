@@ -6,6 +6,16 @@
 - Admin, add student
 - Search for students
 
+## Screencasts
+
+### Authenication
+
+![](https://res.cloudinary.com/dnsmfzkcw/image/upload/v1717265736/intership-1/output_xotvih.gif)
+
+### Add Student,fetch, Search and Modal
+
+![](https://res.cloudinary.com/dnsmfzkcw/image/upload/v1717265733/intership-1/output1_enru3n.gif)
+
 ## Documentation
 
 - Shadcn-UI
@@ -20,16 +30,15 @@ email:punithsp9@gmail.com
 password: dheera
 ```
 
-## Installation
+## Vercel Postgres
 
-Install my-project with npm
+### Users table
 
-```bash
-git clone <repo-link>
-cd my-project
-npm install
-npm run dev
-```
+![](https://res.cloudinary.com/dnsmfzkcw/image/upload/v1717266492/intership-1/Screenshot_20240601_235807_pgqlhv.png)
+
+### Student table
+
+![](https://res.cloudinary.com/dnsmfzkcw/image/upload/v1717266492/intership-1/Screenshot_20240601_235722_coexhk.png)
 
 ## Run Locally
 
@@ -56,6 +65,14 @@ Start the server
 ```bash
   npm run dev
 ```
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your `.env.local` file
+
+`NEXTAUTH_URL`
+
+`NEXTAUTH_SECRET`
 
 ## API Reference
 
