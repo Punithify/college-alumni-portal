@@ -13,6 +13,13 @@
 - React hook form and zod for validation
 - Vercel Postgres
 
+## Credentials
+
+```
+email:punithsp9@gmail.com
+password: dheera
+```
+
 ## Installation
 
 Install my-project with npm
@@ -22,6 +29,32 @@ git clone <repo-link>
 cd my-project
 npm install
 npm run dev
+```
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Punithify/college-alumni-portal
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
 ```
 
 ## API Reference
