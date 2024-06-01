@@ -24,7 +24,8 @@ type StudentData = {
 }
 
 export default function DashboardPage() {
-  const [resData, setResData] = useState([])
+  const [resData, setResData] = useState<StudentData[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     async function getData() {
@@ -32,15 +33,17 @@ export default function DashboardPage() {
       const data = await res.json()
       console.log(data)
       setResData(data)
+      setIsLoading(false)
     }
     getData()
   }, [])
 
-  const data: StudentData[] = resData
   const searchParams = useSearchParams()
   const searchQuery = searchParams.get("query") || ""
-
-  const filteredData = data?.filter(
+  if (!resData) {
+    return <AlertMessage />
+  }
+  const filteredData = resData.filter(
     (item) =>
       item.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -50,6 +53,14 @@ export default function DashboardPage() {
 
   console.log(filteredData)
 
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (resData.length === 0) {
+    return <div>No data available</div>
+  }
+
   return (
     <>
       <div className="flex justify-center items-center mt-4">
@@ -57,24 +68,28 @@ export default function DashboardPage() {
       </div>
       <div className="mt-4 w-full flex justify-center">
         <div className="flex flex-wrap justify-center space-x-4">
-          {filteredData.length == 0 && <AlertMessage />}
-          {filteredData.length &&
-            filteredData.map((item: StudentData) => (
-              <div key={item.id} className="w-64">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{item.username}</CardTitle>
-                    <CardDescription>{item.email}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{item.department}</p>
-                  </CardContent>
-                  <CardFooter>
-                    <p>{item.graduation_year}</p>
-                  </CardFooter>
-                </Card>
-              </div>
-            ))}
+          {resData.length > 0 && filteredData.length === 0 ? (
+            <AlertMessage />
+          ) : (
+            <>
+              {filteredData.map((item: StudentData) => (
+                <div key={item.id} className="w-64">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{item.username}</CardTitle>
+                      <CardDescription>{item.email}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p>{item.department}</p>
+                    </CardContent>
+                    <CardFooter>
+                      <p>{item.graduation_year}</p>
+                    </CardFooter>
+                  </Card>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </>

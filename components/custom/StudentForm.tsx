@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { format } from "date-fns"
@@ -64,6 +65,8 @@ const formSchema = z.object({
 })
 
 export default function StudentForm() {
+  const router = useRouter()
+
   const [date, setDate] = useState<Date | undefined>(new Date())
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -86,6 +89,7 @@ export default function StudentForm() {
         toast({
           title: "student added successfully",
         })
+        router.push("/dashboard")
       } else {
         throw new Error("Network response was not ok")
       }
