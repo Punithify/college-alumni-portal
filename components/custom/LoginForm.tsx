@@ -52,13 +52,13 @@ export default function LoginForm() {
         email,
         password,
         redirect: false,
+        callbackUrl: "/dashboard",
       })
       console.log({ response })
       if (response.ok) {
         console.log("Login Successful", response)
         toast({ title: "Login Successful" })
-        router.push("/dashboard")
-        router.refresh()
+        // router.push("/dashboard")
       } else {
         throw new Error("Network response was not ok")
       }

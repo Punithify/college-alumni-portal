@@ -58,7 +58,7 @@ export default function DashboardPage() {
       <div className="mt-4 w-full flex justify-center">
         <div className="flex flex-wrap justify-center space-x-4">
           {filteredData.length == 0 && <AlertMessage />}
-          {filteredData &&
+          {filteredData.length &&
             filteredData.map((item: StudentData) => (
               <div key={item.id} className="w-64">
                 <Card>
