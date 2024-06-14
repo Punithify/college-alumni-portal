@@ -23,13 +23,6 @@
 - React hook form and zod for validation
 - Vercel Postgres
 
-## Credentials
-
-```
-email:punithsp9@gmail.com
-password: dheera
-```
-
 ## Vercel Postgres
 
 ### Users table
